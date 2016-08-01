@@ -1,0 +1,169 @@
+<html>
+<head>
+	<title>Router.js Test</title>
+	<script type="text/javascript" src="../router.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript">
+	// var router =new Router({ignorecase: false})
+	ignorecase="books";
+	var router =new Router({ignorecase: true})
+	.addRoute("#/users/:user",function(req,next){
+		console.group();
+		console.log("get : name=",req.get("user"));
+		console.log("href=",req.href);
+		console.log("params=",req.params);
+		console.log("query=",req.query);
+		console.log("splats=",req.splats);
+		console.log("hasNext=",req.hasNext);
+		console.log("get(default:15) age=",req.get("age",15));
+		var p=this.ignorecase;
+		console.log(p);
+		var url="#/books/"+p;
+
+		//router.pause();
+		//router.redirect(url)
+    console.log("text pause");
+		//router.setLocation("#/books/"+p);
+		//router._route(router._extractFragment(url) );
+
+		//router.pause();
+		//document.location.href='#/books/chn'; //This will be ignored until you call play
+		//router.play();
+
+		console.groupEnd();
+		//redirect.redirect()
+		// if(req.hasNext){
+		// 	next();
+		// }
+		//$(".div1").html("this is "+req.get("name")+"\'s page");
+	}
+	//.bind(this)
+		)
+	.addRoute("#/users/xiaoming",function(req,next){
+		console.group();
+		console.log("xiaoming");
+		//next('not found',404);
+
+		//router.destroy();
+
+		console.groupEnd();
+	})
+  .route("#/xiaoming",function(req,next){
+    console.log(req);
+  })
+	.addRoute("#/books/*",function(req,next){
+		console.group();
+		console.log("get : name=",req.get("user"));
+		console.log("href=",req.href);
+		console.log("params=",req.params);
+		console.log("query=",req.query);
+		console.log("splats=",req.splats);
+		console.log("hasNext=",req.hasNext);
+		console.log("get(default:15) age=",req.get("age",15))
+		if(req.hasNext){
+			next();
+		}
+		console.groupEnd();
+	})
+	.addRoute(/#\/mac\/([\w]*)?\.(com|cn)/i,function(req,next){
+		console.group();
+		console.log("get : name=",req.get("user"));
+		console.log("href=",req.href);
+		console.log("params=",req.params);
+		console.log("query=",req.query);
+		console.log("splats=",req.splats);
+		console.log("hasNext=",req.hasNext);
+		console.log("get(default:15) age=",req.get("age",15))
+		if(req.hasNext){
+			next();
+		}
+		console.groupEnd();
+	})
+	/*=== before：在正常匹配之前执行的逻辑，不包括404 ===*/
+	/*=========== 多个before 按加载顺序执行 ==========*/
+	.before(function(req,next){
+		console.log("before2 addroute do this");
+		next();
+	})
+	.before(function(req,next){
+		console.log("before1 addroute do this");
+		next();
+	})
+	// .errors(404,function(){
+	// 	//console.warn(arguments[1]+" is not defined");
+	// 	console.warn(arguments);
+	// 	//div1").html("this is "+req.get("name")+"\'s page");
+	// })
+	// .run("#/users/wangxun")
+// 	window.onpopstate = function(event){
+//     console.log(event.state);
+// }
+</script>
+
+<style>
+	*{
+		margin:0;
+		padding: 0;
+	}
+	html,body{
+		width:100%;
+		height:100%;
+	}
+	.div1{
+		width:40%;
+		height:200%;
+		float: left;
+		margin:5%;
+		border:1px solid black;
+		box-sizing: border-box;
+	}
+	.div2{
+		width:40%;
+		height:200%;
+		margin:5%;
+		float:left;
+		border:1px solid black;
+		box-sizing: border-box;
+	}
+</style>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+<div class="div1">
+<a href="#1F" >锚点1</a>
+	</div>
+</div>
+<div class="div2">
+	<a href="#/xiaoming"> link to a xiaoming</a><br>
+</div>
+
+
+<div id="1F">
+<p>
+11111111111
+</br>
+11111111111
+</br>11111111111
+</br>11111111111
+</br>11111111111
+</br>11111111111
+</br>11111111111
+</br>11111111111
+</br>11111111111
+</br>11111111111
+</br>11111111111
+</br>11111111111
+</br>11111111111
+</br>11111111111
+</br>11111111111
+</br>11111111111
+</br>
+</p>
+</div>
+<div id="/users/xiaoming">
+xiaoming
+</div>
+</body>
+</html>
